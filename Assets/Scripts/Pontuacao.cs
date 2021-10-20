@@ -24,4 +24,12 @@ public class Pontuacao : MonoBehaviour
         pontos = 0;
         textoPontucao.text = pontos.ToString();
     }
+    public void SalvarRecorde()
+    {
+        int recorde = PlayerPrefs.GetInt(Tags.Recorde);
+        if (pontos > recorde)
+        {
+            PlayerPrefs.SetInt(Tags.Recorde, pontos);
+        }
+    }
 }
