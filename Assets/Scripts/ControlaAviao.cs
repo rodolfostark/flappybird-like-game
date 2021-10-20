@@ -9,6 +9,7 @@ public class ControlaAviao : MonoBehaviour
     private Rigidbody2D fisica;
     private Diretor diretor;
     private Vector3 posicaoInicial;
+    private bool deveImpulsionar;
 
     private void Awake()
     {
@@ -16,20 +17,24 @@ public class ControlaAviao : MonoBehaviour
         diretor = GameObject.FindObjectOfType<Diretor>();
         posicaoInicial = this.transform.position;
     }
-
-    // Update is called once per frame
     private void Update()
     {
         if(Input.GetButtonDown(Tags.BotaoEsquerdoDoMouse))
         {
-            Impulsionar();
+            deveImpulsionar = true;
         }
+    }
+    private void FixedUpdate()
+    {
+        if(deveImpulsionar)
+            Impulsionar();
     }
 
     private void Impulsionar()
     {
         fisica.velocity = Vector2.zero;
         fisica.AddForce(Vector2.up * Forca, ForceMode2D.Impulse);
+        deveImpulsionar = false;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
