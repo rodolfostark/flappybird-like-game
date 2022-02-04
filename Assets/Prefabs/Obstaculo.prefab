@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4e278a2eb560242af8f87c63f78a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocidade: 5
+  Velocidade: {fileID: 11400000, guid: d93a6e30c1c96dc4ea550ebf3c4e9334, type: 2}
   variacaoDaPosicaoY: 1.4
 --- !u!50 &2861936626127303743
 Rigidbody2D:

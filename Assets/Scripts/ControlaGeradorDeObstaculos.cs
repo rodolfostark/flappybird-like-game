@@ -5,16 +5,21 @@ using UnityEngine;
 public class ControlaGeradorDeObstaculos : MonoBehaviour
 {
     [SerializeField]
-    private float tempoParaGerarObstaculos;
+    private float tempoParaGerarObstaculosFacil;
+    [SerializeField]
+    private float tempoParaGerarObstaculosDificil;
     private float cronometroRegressivoDeGeracao;
     [SerializeField]
     private GameObject manualDeInstrucoes;
-
+    private ControleDeDificuldade controleDeDificuldade;
     private void Awake()
     {
-        cronometroRegressivoDeGeracao = tempoParaGerarObstaculos;
+        cronometroRegressivoDeGeracao = tempoParaGerarObstaculosFacil;
     }
-
+    private void Start()
+    {
+        controleDeDificuldade = GameObject.FindObjectOfType<ControleDeDificuldade>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,7 +27,7 @@ public class ControlaGeradorDeObstaculos : MonoBehaviour
         if(cronometroRegressivoDeGeracao <= 0)
         {
             GameObject.Instantiate(manualDeInstrucoes, transform.position, Quaternion.identity);
-            cronometroRegressivoDeGeracao = tempoParaGerarObstaculos;
+            cronometroRegressivoDeGeracao = Mathf.Lerp(tempoParaGerarObstaculosFacil, tempoParaGerarObstaculosDificil, controleDeDificuldade.Dificuldade);
         }
     }
 }

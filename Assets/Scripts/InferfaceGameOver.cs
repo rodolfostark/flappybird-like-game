@@ -9,6 +9,20 @@ public class InferfaceGameOver : MonoBehaviour
     private GameObject imagemGameOver;
     [SerializeField]
     private Text valorRecorde;
+    [SerializeField]
+    private Image posicaoMedalha;
+    [SerializeField]
+    private Sprite medalhaOuro;
+    [SerializeField]
+    private Sprite medalhaPrata;
+    [SerializeField]
+    private Sprite medalhaBronze;
+    private Pontuacao pontuacao;
+    private int recorde;
+    private void Start()
+    {
+        pontuacao = GameObject.FindObjectOfType<Pontuacao>();   
+    }
     public void MostrarInterface()
     {
         AtualizarInterfaceGrafica();
@@ -20,7 +34,23 @@ public class InferfaceGameOver : MonoBehaviour
     }
     private void AtualizarInterfaceGrafica() 
     {
-        int recorde = PlayerPrefs.GetInt(Tags.Recorde);
+        recorde = PlayerPrefs.GetInt(Tags.Recorde);
         valorRecorde.text = recorde.ToString();
+        VerificarCorMedalha();
+    }
+    private void VerificarCorMedalha()
+    {
+        if(pontuacao.Pontos > recorde - 2)
+        {
+            posicaoMedalha.sprite = medalhaOuro;
+        }
+        else if(pontuacao.Pontos > recorde / 2)
+        {
+            posicaoMedalha.sprite = medalhaPrata;
+        }
+        else
+        {
+            posicaoMedalha.sprite = medalhaBronze;
+        }
     }
 }
